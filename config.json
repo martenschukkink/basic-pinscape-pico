@@ -1,0 +1,236 @@
+// Pinscape Pico Configuration
+// Based on Starter Template - Copyright 2024, 2025 Michael J Roberts / BSD-3-Clause license / NO WARRANTY
+
+{
+    // ---------------------------------------------------------------------
+    //
+    // Basic device setup
+    //
+
+    // Unit identification
+    id: {
+        // Every configuration should have a unit number, to identify the device to DOF.
+        unitNum: 1,
+
+        // The unit name is just for display purposes, to help YOU tell your Pinscape Pico units apart.
+        unitName: "Main Pico",
+
+        // Emulated LedWiz ID.  This is for use by an LedWiz API emulator
+        // on the PC host. Set this to 0 to disable emulation for this Pico.
+        ledWizUnitNum: 1,
+    },
+
+    serialPorts: {
+        // USB virtual COM port (CDC port). Set the terminal to 8 data bits, 1 stop bit, no parity, 115200 baud.
+        usb: {
+            logging: true,       // enable logging on this port
+            console: {
+                enable: true,    // enable the interactive command line on this port
+                bufSize: 2048,   // buffer size for console output
+            },
+        },
+    },
+
+    logging: {
+        filter: "error warning info config",
+        bufSize: 8192,
+        timestamps: true,
+        typeCodes: true,
+        colors: true,
+    },
+
+
+    // ---------------------------------------------------------------------
+    //
+    // USB virtual device setup.
+
+    // HID keyboard interface.  Sends keyboard keystrokes to the PC.
+    keyboard: {
+        enable: true,
+    },
+
+    // HID gamepad interface.  Emulates a Windows gamepad
+    gamepad: {
+        enable: true,       // enable the gamepad emulation
+        x: "nudge.x",       // connect the accelerometer X axis to the joystick X axis
+        y: "nudge.y",       // ditto for the Y axis
+        z: "plunger.z",     // connect the plunger position reading to the joystick Z axis
+    },
+
+    // Open Pinball Device HID.  Sends nudge, plunger, and button press information
+    // via a dedicated, pinball-specific virtual device.
+    openPinballDevice: {
+        enable: true,
+    },
+
+    // -------------------------------------------------------------------
+    //
+    // Buttons.  This section sets up the mappings between your
+    // physical button input ports and the actions that the buttons
+    // invoke.
+
+    buttons: [
+    
+	// LEFT SIDE PINS
+	// Left flipper button
+        { 
+            source: { type: "gpio", gp: 0 },
+            action: { type: "key", key: "left shift" },  
+        },
+        // Right flipper button
+        { 
+            source: { type: "gpio", gp: 1 },
+            action: { type: "key", key: "right shift" }, 
+        },
+        // Left 2nd flipper switch (for double-leaf switches)
+        { 
+            source: { type: "gpio", gp: 2 },
+            action: { type: "key", key: "left windows" }, 
+        },
+        // Right 2nd flipper switch (for double-leaf switches)
+        { 
+            source: { type: "gpio", gp: 3 },
+            action: { type: "key", key: "right alt" }, 
+        },
+        // Left MagnaSave button
+        { 
+            source: { type: "gpio", gp: 4 },
+            action: { type: "key", key: "left ctrl" }, 
+        },
+        // Right MagnaSave button
+        { 
+            source: { type: "gpio", gp: 5 },
+            action: { type: "key", key: "right ctrl" }, 
+        },
+        // Start button
+        { 
+            source: { type: "gpio", gp: 6 },
+            action: { type: "key", key: "1" },     
+        },
+        // Exit button
+        { 
+            source: { type: "gpio", gp: 7 },
+            action: { type: "key", key: "esc" },   
+        },
+        // Launch Ball
+        { 
+            source: { type: "gpio", gp: 8 },
+            action: { type: "key", key: "enter" }, 
+        },
+        // Extra Ball/Buy-In Button
+        { 
+            source: { type: "gpio", gp: 9 },
+            action: { type: "key", key: "2" }, 
+        },
+        // "7" = operator control panel cancel/exit
+        { 
+            source: { type: "gpio", gp: 10 },
+            action: { type: "key", key: "7" },     
+        },
+	// "8" = operator control panel previous/down
+        { 
+            source: { type: "gpio", gp: 11 },
+            action: { type: "key", key: "8" },     
+        },
+        // "9" = operator control panel next/up
+        { 
+            source: { type: "gpio", gp: 12 },
+            action: { type: "key", key: "9" },     
+        },
+	// "0" = operator control panel enter/select
+        { 
+            source: { type: "gpio", gp: 13 },
+            action: { type: "key", key: "0" },     
+        },
+	// "-" - VP Volume Down
+        { 
+            source: { type: "gpio", gp: 14 },
+            action: { type: "key", key: "-" },     
+        },
+	// "+" = VP Volume Up
+        {
+            source: { type: "gpio", gp: 15 },
+            action: { type: "key", key: "+" },     
+        },
+        
+	// RIGHT SIDE PINS
+	// Left coin chute switch
+        { 
+            source: { type: "gpio", gp: 19 },
+            action: { type: "key", key: "3" },     
+        },
+        // "4" = middle coin chute switch
+        { 
+            source: { type: "gpio", gp: 20 },
+            action: { type: "key", key: "4" },     
+        },
+        // "5" = right coin chute switch
+        { 
+            source: { type: "gpio", gp: 21 },
+            action: { type: "key", key: "5" },     
+        },
+	// End = coin door open/closed switch
+        { 
+            source: { type: "gpio", gp: 22 },
+            action: { type: "key", key: "end" },
+        },	
+    ],
+
+
+    // -------------------------------------------------------------------
+    //
+    // Nudging through MMA8451Q accelerometer chip 
+    
+    nudge: {
+      x: "+X",              // map the chip's X axis to Pinscape's nudge X axis
+      y: "+Y",              // map the chip's Y axis to Pinscape's nudge Y axis
+      z: "+Z",              // map the chip's Z axis to Pinscape's nudge Z axis
+    },
+
+    mma8451q: {
+     i2c: 1,        // which I2C unit you're using - 0 if you connected the device to I2C0 pins, 1 for I2C1 pins
+     addr: 0x1D,    // the chip's I2C address - 0x1C if you connected "A" (SA0) to GND, 0x1D if you connected it to 3V3 OUT or left it unconnected
+     interrupt: 28, // the GPIO port number where you connected the INTERRUPT (INT or INT1) pin - OMIT IF NOT CONNECTED
+     gRange: 2,     // the "g" range to select - 2 selects +/- 2g, which is the most sensitive setting, and usually the best for virtual pinball
+    },
+
+
+    // -------------------------------------------------------------------
+    //
+    // Plunger through ADS1115 A/D converter chip
+    
+    plunger: {
+        source: "ads1115",    // source sensor type; usually inferred automatically from available sensors
+        autoZero: true,       // enable auto-zeroing; only applies to quadrature sensors, ignored otherwise
+        autoZeroTime: 5000,   // time in milliseconds for auto-zeroing; plunger must be stationary this long to auto-zero
+    },
+
+    // ADS1115 ADC
+     ads1115: {
+         i2c: 0,              // I2C bus number, 0 for I2C0, 1 for I2C1
+         addr: 0x48,          // I2C address, set on the chip via pin inputs, 0x48 to 0x4B
+         ready: -1,           // GPIO connected to the chip's READY pin, or -1 if not connected
+         channel: 0,          // ADC channel number (0 to 3) on the chip where the pot is connected
+    },
+
+    // -------------------------------------------------------------------
+    //
+    // Hardware setup: I2C bus
+    
+    // I2C bus with ADS1115 A/D Coverter for plunger
+    i2c0: {
+        sda: 16,
+        scl: 17,
+        speed: 400000,
+    },
+    
+    // I2eC bus with MMA8451 Accelerometer for nudging
+    i2c1: {
+      sda: 26,         // the GPIO port number where you connected the chip's SDA pin
+      scl: 27,         // GPIO port connected to the chip's SCL pin
+      speed: 400000,   // bus speed - most chips operate at 400000
+      pullup: true,    // enable the Pico's internal pull-up resistors on SDA and SCL
+    },
+}
+
+
