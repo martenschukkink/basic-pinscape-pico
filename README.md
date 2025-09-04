@@ -6,7 +6,9 @@ The board is based on the great work of Michael J Roberts aka MJR, who developed
 
 This project supports connecting almost all necessary pinball related buttons. It also supports nudging through the Adafruit MMA8451 breakout board and uses the Adafruit ADS1115 breakout board to connect an analog plunger with a potentiometer.
 
-This project is meant as a basic Virtual Pinball setup without any outputs. If you need outputs, this project might not be for you, or you need to make adjustments to the design.
+![Complete layout](layout-complete.png)
+
+This project is meant as a basic Virtual Pinball setup without outputs. If you need outputs, this project might not be for you. 
 
 ## Materials and tools needed
 
@@ -36,17 +38,16 @@ The orange connections are made at the front of the board, _below_ the breakout 
 
 The backside view (a mirrored image) can be used as a reference when soldering on the back of the Proto-Board.
 
+### Connecting the MMA8451 and ADS1115 to the Pico
 1. Solder the included pin headers to the MMA8451 and the ADS1115
 1. On the front of the Proto-Board: create the orange connections using the preformed jump wires. Use tape to keep them in place, turn around the board and bend the ends in the right direction (follow the yellow lines). Now turn around the board again and remove the tape. If all is ok, the jump wires should stay in place.
 1. Place the Raspberry Pi Pico H, the MMA8451 and the ADS1115 on the board. Make sure the pins are in the right place, exactly like in the picture. Use tape to keep them in place and turn around the board again.
 1. On the back of the Proto-Board: Bend the pins of the components that are connected in the right direction (follow the yellow lines).
 1. Now solder the yellow connections. Make sure to create a solid connection from the components to the Proto-Board as well as a solid connection between the pins that need to be connected to each other.
 
-### Buttons and plunger
+### Connecting the plunger and buttons
 
-![Complete layout](layout-complete.png)
-
-1. Solder the three wires for the plunger (purple/yellow lines).
+1. Solder the three wires for the plunger (purple/yellow lines) as displayed in the image.
 1. Solder the wires for the buttons as displayed in the image. Connect each button with one end to the corresponding pin of the Pinscape Pico (red/yellow lines). Use any ground pin to connect the other end of the button (black/yellow lines)
 
 ### Software configuration
@@ -60,7 +61,7 @@ You now should be all set to use the Pinscape Pico as a Virtual Pinball controll
 
 ## Background information
 
-Below you can find the button and breakout board connections to the Raspberry Pi Pico / Pinscape Pico. The configuration in the [config.json](config.json) file is based on this layout. If you change something in the layout, this should be updated in the configuration.
+Below you will find the button and breakout board connections to the Raspberry Pi Pico / Pinscape Pico. The configuration in the [config.json](config.json) file is based on this layout. If you change something in the layout, the config file should be updated accordingly.
  
 ![Pinscape Pico: buttons and breakout boards](pinscape-pico-buttons-and-breakout-boards.png)
 
@@ -71,8 +72,8 @@ Copyright 2025, Marten Schukkink
 
 Released under a [BSD 3-clause license - NO WARRANTY](license.txt)
 
-## Links and credits
+## Credits and links
 
 - A big shoutout to Michael J Roberts aka MJR for creating the original Pinscape, the [Pinscape Pico](https://github.com/mjrgh/PinscapePico/), the [PinballY frontend](http://mjrnet.org/pinscape/PinballY.php) and [The New Pinscape Build Guide](http://mjrnet.org/pinscape/BuildGuideV2/BuildGuide.php).
-- Use and configuration of the MMA8451Q [[1]](https://github.com/mjrgh/PinscapePico/blob/main/Guides/MMA8451Q-Setup.md)
-- Use and configuration of the ADS1115 [[2]](https://github.com/mjrgh/PinscapePico/tree/main/ExpansionBoards/DIY-Friendly#ads1115-adc) [[3]](https://learn.adafruit.com/adafruit-4-channel-adc-breakouts)
+- Use and configuration of the MMA8451Q: [[1]](https://github.com/mjrgh/PinscapePico/blob/main/Guides/MMA8451Q-Setup.md) [[2]](http://mjrnet.org/pinscape/PinscapePico/Help/JSONConfigRef.htm#mma8451q)
+- Use and configuration of the ADS1115: [[1]](https://github.com/mjrgh/PinscapePico/tree/main/ExpansionBoards/DIY-Friendly#ads1115-adc) [[2]](http://mjrnet.org/pinscape/PinscapePico/Help/JSONConfigRef.htm#ads1115)  [[3]](https://learn.adafruit.com/adafruit-4-channel-adc-breakouts)
