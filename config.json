@@ -209,7 +209,7 @@
      ads1115: {
          i2c: 0,              // I2C bus number, 0 for I2C0, 1 for I2C1
          addr: 0x48,          // I2C address, set on the chip via pin inputs, 0x48 to 0x4B
-         ready: -1,           // GPIO connected to the chip's READY pin, or -1 if not connected
+         ready: 18,           // GPIO connected to the chip's READY pin, or -1 if not connected
          channel: 0,          // ADC channel number (0 to 3) on the chip where the pot is connected
     },
 
