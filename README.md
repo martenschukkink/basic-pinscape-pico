@@ -65,7 +65,6 @@ Below you will find the button and breakout board connections to the Raspberry P
  
 ![Pinscape Pico: buttons and breakout boards](pinscape-pico-buttons-and-breakout-boards.png)
 
-Note: at this time, the ADS1115 ALRT (alert) pin is connected to GP18. However, it is not currently configured to be used; it resulted in a lagging plunger.
 
 ## License
 Copyright 2025, Marten Schukkink
